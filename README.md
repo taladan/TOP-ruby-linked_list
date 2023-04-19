@@ -78,9 +78,9 @@ For our linked list assignment from [The Odin Project](https://www.theodinprojec
 %%{init: {'theme':'forest'}}%%
 flowchart TD;
   append[Append Value]-->if{List empty?}
-  if-->|Yes| make_head[Create Node & Make it the Head]
+  if-->|true| make_head[Create Node & Make it the Head]
   make_head --> return_node((Return Node))
-  if --> |No| make_tail[Create Node & Make it the Tail]
+  if --> |false| make_tail[Create Node & Make it the Tail]
   make_tail --> return_node
 ```
 
@@ -106,8 +106,8 @@ flowchart TD;
 %%{init: {'theme':'forest'}}%%
 flowchart TD;
   size[size] --> empty{empty?}
-  empty -->|Yes| ret0((return 0))
-  empty -->|No| count_nodes(["count_node(head, 1)"])
+  empty -->|true| ret0((return 0))
+  empty -->|false| count_nodes(["count_node(head, 1)"])
 ```
 
 *Note:* Here you'll see that we call `count_node` with the value of the current head and the start of our counting variable.  The count_node method (private) looks like this:
@@ -121,8 +121,8 @@ This is a private method
 flowchart TD;
   start["size(head, count)"] --> count_node(["count_node(node, counter)"]) 
   count_node --> tail?{tail?}
-  tail? -->|Yes| ret_counter([return counter])
-  tail? -->|No| count_node
+  tail? -->|true| ret_counter([return counter])
+  tail? -->|false| count_node
   tail? ~~~ |"Call count_node with the arguments<br /> count_node(node.next_node, counter += 1)"| tail?
 ```
 
@@ -145,8 +145,8 @@ flowchart TD;
 %%{init: {'theme':'forest'}}%%
 flowchart TD;
   start[tail] --> tail?{node.next_node == nil ?} 
-  tail? -->|No| tail?
-  tail? -->|Yes| ret_node([return node])
+  tail? -->|false| tail?
+  tail? -->|true| ret_node([return node])
   tail? ~~~ |"Move to node.next_node"| tail?
 ```
 
@@ -188,8 +188,8 @@ flowchart TD;
 flowchart TD;
   include["include?(value)"] --> has(["has_value(value, node=@head)"])
   has --> true{"@data == value?"}
-  true --> |Yes| return((return true))
-  true --> |No| has
+  true --> |true| return((return true))
+  true --> |false| has
 ```
 
 
