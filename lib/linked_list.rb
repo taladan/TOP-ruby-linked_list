@@ -45,9 +45,19 @@ class LinkedList
   end
 
   def pop
+    if @head.next_node.nil?
+      node = @head
+      @head = nil
+      return node
+    end
+    new_tail = at(count-2, @head)
+    old_tail = new_tail.next_node
+    new_tail.clear!
+    return old_tail
   end
 
-  def include?
+  def include?(data)
+    has_data(data, node=@head)
   end
 
   def find
@@ -93,6 +103,12 @@ class LinkedList
   end
 
   def concat
+  end
+  
+  def has_data(value, node=@head)
+    return true if node.data == value
+    return false if node.tail?
+    has_data(value, node.next_node)
   end
 
 end
