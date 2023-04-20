@@ -60,7 +60,11 @@ class LinkedList
     has_data(data, node=@head)
   end
 
-  def find
+  def find(value, node=@head, count=0)
+    return count if value == node.data
+    return nil if node.tail?
+    node = node.next_node
+    find(value, node, count += 1)
   end
 
   def to_s
