@@ -36,9 +36,12 @@ class LinkedList
   end
 
   def tail
+    return last_node(@head)
   end
 
-  def at
+  def at(position, node=@head, counter=0)
+    return node if counter == position
+    at(position, node.next_node, counter += 1)
   end
 
   def pop
