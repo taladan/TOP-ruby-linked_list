@@ -6,7 +6,7 @@ A Linked List is a data structure that allocates pieces of memory randomly to
 store data using a series of Nodes that hold their data value and either a
 pointer to the next node both a pointer to the next node and the previous node.
 
-The Linked List holds a reference to the first node, which is knowns as the **head**.  The end of the list is a node that points to a **null**(**nil**) value. Because of the way the linked list is structured, this allows for a list of any length to be stored dynamically in memory - Unlike other linear data structures like Arrays, Linked lists do **NOT** require a contiguous block of memory to be addressed to store the entire list.
+The Linked List holds a reference to the first node, which is known as the **head**.  The end of the list is a node that points to a **null**(**nil**) value. Because of the way the linked list is structured, this allows for a list of any length to be stored dynamically in memory - Unlike other linear data structures like Arrays, Linked lists do **NOT** require a contiguous block of memory to be addressed to store the entire list.
 
 ---
 
