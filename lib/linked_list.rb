@@ -67,16 +67,41 @@ class LinkedList
     find(value, node, count += 1)
   end
 
-  def to_s
+  def to_s(start=0, terminal=nil)
+    return nil if empty?
+    node = at(start)
+    stringify_node(node.next_node, sentence_starter(node.data), start, terminal, start+1)
   end
 
-  def insert_at
+  def insert_at(data, position)
+    node = new_node(data)
+    old_node = at(position)
+    previous_node = at(position-1)
+    node.next_node = old_node
+    previous_node.next_node = node
+    node
   end
 
-  def remove_at
+  def remove_at(position)
+    node = at(position)
+    previous_node = at(position - 1)
+    previous_node.next_node = node.next_node
+    node.clear!
+    node
   end
 
   private
+
+  def stringify_node(node, sentence, start,  terminal, counter=1)
+    return concat(sentence, node, terminal) if node.tail? || terminal == counter - start + 1
+    # This is a bit hackey.  Sending nil to concat so that it won't mis-build the list.
+    stringify_node(node.next_node,concat(sentence,node, nil), start, terminal, counter +=1) 
+  end
+  
+  def sentence_starter(data)
+    "( #{data} ) -> "
+  end
+
   def count_node(node, counter)
     return counter if node.tail?
     count_node(node.next_node, counter += 1)
@@ -103,10 +128,10 @@ class LinkedList
     return @head == nil
   end
 
-  def stringify
-  end
-
-  def concat
+  def concat(sentence, node, terminal)
+    return sentence + "( #{node.data} ) -> nil" if node.tail?
+    return sentence + "( #{node.data} )" if !terminal.nil?
+    return sentence + "( #{node.data} ) ->"
   end
   
   def has_data(value, node=@head)
